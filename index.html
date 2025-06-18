@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Professional Profile</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--secondary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+        }
+
+        /* Profile Section */
+        .profile {
+            background-color: rgba(245, 239, 239, 0.829);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--primary-color);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .profile h2 {
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .profile-title {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            margin: 0 10px;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Academic Section */
+        .academic-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+        }
+
+        .education-item {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .education-item:last-child {
+            border-bottom: none;
+        }
+
+        .education-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        .education-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* Certificates Gallery */
+        .certificates-gallery {
+            margin-top: 40px;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .certificate-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .certificate-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .certificate-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .certificate-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .certificate-item:hover .certificate-overlay {
+            transform: translateY(0);
+        }
+
+        /* Projects Section */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-content h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .project-content p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .project-tag {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .project-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .project-link:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* About Section */
+        .about-content {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .about-text h3 {
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .skills {
+            margin-top: 20px;
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .contact-info h3 {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Modal for certificate gallery */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            overflow: auto;
+        }
+
+        .modal-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            padding: 20px;
+        }
+
+        .modal-img {
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .modal-caption {
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 60px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-container {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--secondary-color);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+                transition: left 0.3s;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+<div class="container">
+<nav>
+<div class="logo">MyProfile</div>
+<ul class="nav-links">
+<li><a href="#profile">Profile</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+<div class="hamburger">
+<i class="fas fa-bars"></i>
+</div>
+</nav>
+</div>
+</header>
+<section id="profile">
+<div class="container">
+<div class="profile">
+<img alt="Profile Photo" class="profile-img" src="profile.jpg"/>
+<h2>SAM ALLWIN.L</h2>
+<p class="profile-title">Web Developer</p>
+<p>Specializing in web development.</p>
+<div class="social-links">
+<a href="https://www.linkedin.com/in/sam-allwin-940742315?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+<a href="https://github.com/Sam-allwin-prog"><i class="fab fa-github"></i></a>
+<a href="https://t.me/Sam_allwin"><i class="fab fa-telegram"></i></a>
+<a href="https://www.instagram.com/sam_sation_all?igsh=dDMzcm9tbXZpejRl"><i class="fab fa-instagram"></i></a>
+</div>
+</div>
+</div>
+</section>
+<section id="projects">
+<div class="container">
+<h2 class="section-title">Projects &amp; Research</h2>
+<div class="projects-container">
+<div class="project-card">
+<img alt="Project Image" class="project-img" src="discrimination-project.jpeg"/>
+<div class="project-content">
+<h3>Untouchablity practices</h3>
+<p>My award-winning research paper focused on addressing the modern-day issue of caste-based discrimination. The project proposed a data-driven and socially aware solution aimed at identifying, reducing, and ultimately helping to overcome incidents of caste-based bias. Presented at an international conference, the work was recognized as Best Research Paper, highlighting its relevance, innovation, and potential to contribute to social equity through technology.</p>
+<div class="project-tags">
+<span class="project-tag">html</span>
+<span class="project-tag">php</span>
+<span class="project-tag">javascript</span>
+</div>
+</div>
+</div>
+<div class="project-card">
+<img alt="Project Image" class="project-img" src="mess-tracking-system.png"/>
+<div class="project-content">
+<h3>Mordenized mess tracking system</h3>
+<p>As part of another academic initiative, I worked on designing a structured mess management system aimed at improving efficiency and transparency. The system was developed to accurately track student attendance at meals and calculate the corresponding charges based on individual usage, ensuring fair billing.</p>
+<div class="project-tags">
+<span class="project-tag">iot</span>
+<span class="project-tag">html</span>
+<span class="project-tag">php</span>
+<span class="project-tag">database-sql</span>
+</div>
+</div>
+</div>
+<div class="project-card">
+<img alt="Project Image" class="project-img" src="ration-booking.png"/>
+<div class="project-content">
+<h3>Easy call hassle free booking for ration shop</h3>
+<p>I addressed a real-world issue where individuals were experiencing wait times of over an hour to collect their festival bonuses. The goal was to develop an efficient, technology-driven solution to streamline the distribution process, minimize delays, and enhance user experience during high-traffic periods.</p>
+<div class="project-tags">
+<span class="project-tag">html</span>
+<span class="project-tag">css</span>
+<span class="project-tag">php</span>
+<span class="project-tag">database - sql</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="about">
+<div class="container">
+<h2 class="section-title">About Me</h2>
+<div class="about-content">
+<div class="about-text">
+<h3>Who I Am</h3>
+<p>I have successfully completed my undergraduate degree in Computer Science with a strong academic record, graduating with a high CGPA. This achievement reflects my dedication to the field, consistent performance, and deep interest in computing and problem-solving.</p>
+<p>As part of my final year service learning project, I conducted a research study which was recognized at an international conference, earning the award for Best Research Paper. This experience not only deepened my technical knowledge but also strengthened my analytical and communication skills through academic writing and presentation.</p>
+<p>In my free time, I enjoy watching television series, particularly those with compelling storytelling, strong character development, and innovative narratives. This hobby allows me to relax and also appreciate creative storytelling</p>
+</div>
+<div class="skills">
+<h3>My Skills</h3>
+<div class="skill-item">
+<div class="skill-name">
+<span>Web Development</span>
+<span>95%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 95%;"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-name">
+<span>Machine Learning</span>
+<span>90%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 90%;"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-name">
+<span>Communication skill</span>
+<span>85%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 85%;"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-name">
+<span>Software engineer</span>
+<span>80%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 80%;"></div>
+</div>
+</div>
+<div class="skill-item">
+<div class="skill-name">
+<span>Sql</span>
+<span>75%</span>
+</div>
+<div class="skill-bar">
+<div class="skill-progress" style="width: 75%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="contact">
+<div class="container">
+<h2 class="section-title">Contact Information</h2>
+<div class="contact-container">
+<div class="contact-info">
+<h3>Get In Touch</h3>
+<div class="contact-details">
+<div class="contact-item">
+<div class="contact-icon">
+<i class="fas fa-map-marker-alt"></i>
+</div>
+<div>
+<h4>Location</h4>
+<p>6A ngo colony thaila nager pudukkottai</p>
+</div>
+</div>
+<div class="contact-item">
+<div class="contact-icon">
+<i class="fas fa-envelope"></i>
+</div>
+<div>
+<h4>Email</h4>
+<p>brusely1234@gmail.com</p>
+</div>
+</div>
+<div class="contact-item">
+<div class="contact-icon">
+<i class="fas fa-phone"></i>
+</div>
+<div>
+<h4>Phone</h4>
+<p>6374287370</p>
+</div>
+</div>
+</div>
+<div class="social-links">
+<a href="https://www.linkedin.com/in/sam-allwin-940742315?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+<a href="https://github.com/Sam-allwin-prog"><i class="fab fa-github"></i></a>
+<a href="https://www.instagram.com/sam_sation_all?igsh=dDMzcm9tbXZpejRl"><i class="fab fa-instagram"></i></a>
+<a href="https://t.me/Sam_allwin"><i class="fab fa-telegram"></i></a>
+</div>
+</div>
+<div class="contact-form">
+<h3>Send Me a Message</h3>
+<form>
+<input placeholder="Your Name" required="" type="text"/>
+<input placeholder="Your Email" required="" type="email"/>
+<input placeholder="Subject" type="text"/>
+<textarea placeholder="Your Message" required=""></textarea>
+<button class="submit-btn" type="submit">Send Message</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- Certificate Modal -->
+<div class="modal" id="certificateModal">
+<span class="close" onclick="closeModal()">×</span>
+<div class="modal-content">
+<img alt="Certificate" class="modal-img" id="modalImage" src=""/>
+<p class="modal-caption" id="modalCaption"></p>
+</div>
+</div>
+<footer>
+<div class="container">
+<p>© 2025 sam allwin. All Rights Reserved.</p>
+</div>
+</footer>
+<script>
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Certificate Modal
+        function openModal(imgSrc, caption) {
+            const modal = document.getElementById('certificateModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+
+            modal.style.display = "block";
+            modalImg.src = imgSrc;
+            modalCaption.textContent = caption;
+        }
+
+        function closeModal() {
+            document.getElementById('certificateModal').style.display = "none";
+        }
+
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById('certificateModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Animate skill bars on scroll
+        const skillBars = document.querySelectorAll('.skill-progress');
+
+        function animateSkillBars() {
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        }
+
+        // Intersection Observer for skill bars animation
+        const aboutSection = document.querySelector('#about');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateSkillBars();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(aboutSection);
+    </script>
+</body>
+</html>
